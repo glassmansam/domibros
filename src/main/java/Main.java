@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Main {
     static String username;
@@ -16,13 +18,12 @@ public class Main {
 //        properties.setProperty("useSSL", "false");
 
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/domibros?user=root&password=root&serverTimezone=Europe/Rome");
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         logOption(connection);
         String query = "SELECT id,username, password FROM customer LIMIT 10";
         ResultSet rs = null;
