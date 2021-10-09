@@ -56,6 +56,7 @@ public class Main {
     }
 
     public static void register(Connection connection) {
+        JFrame frame = new JFrame();
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Put in your data please!");
         panel.add(label);
@@ -75,7 +76,7 @@ public class Main {
                 String first_name = first_nameR.getText();
                 String last_name = last_nameR.getText();
                 String username = usernameR.getText();
-                String password = passwordR.getPassword().toString();
+                String password = String.copyValueOf(passwordR.getPassword());
                 int phone_number = Integer.parseInt(phone_numberR.getText());
                 String query = "INSERT INTO customer (username, password,first_name,last_name,phone_number) VALUES ('" + username + "','" + password + "','" + first_name + "','" + last_name + "','" + phone_number + "')";
                 try (Statement stmt = connection.createStatement()) {
@@ -86,6 +87,9 @@ public class Main {
             }
         });
         panel.add(button);
+        frame.add(panel);
+        frame.setSize(400,400);
+        frame.setVisible(true);
     }
 
     public static void logIn(Connection connection) {
@@ -104,13 +108,7 @@ public class Main {
             username = userName.getText();
             password = new String(passWord.getPassword());
         }
-        String query = "INSERT INTO customer (username, password) VALUES ('" + username + "','" + password + "')";
 
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
 
