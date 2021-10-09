@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gui.StartScreenController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="220.0" spacing="12.0" AnchorPane.bottomAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Enter Details">
+               <font>
+                  <Font size="24.0"/>
+               </font>
+            </Label>
+            <TextField fx:id="firstNameField" promptText="First Name"/>
+            <TextField fx:id="lastNameField" promptText="Last Name"/>
+            <TextField fx:id="streetField" promptText="Street and House number"/>
+            <TextField fx:id="postcodeField" promptText="Postcode"/>
+            <TextField fx:id="cityField" promptText="City"/>
+            <TextField fx:id="phoneNumberField" promptText="Phone Number"/>
+            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#enter" text="Enter"/>
+            <Label fx:id="addressMsg" textFill="#d35400"/>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            prefHeight="200.0" prefWidth="380.0" spacing="15.0" style="-fx-background-color: #34495e;"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Domibros" textFill="#ecf0f1">
+               <font>
+                  <Font size="48.0"/>
+               </font>
+            </Label>
+            <Label text="Returning customers:" textFill="WHITE">
+               <font>
+                  <Font size="18.0"/>
+               </font>
+            </Label>
+            <TextField fx:id="usernameField" maxWidth="-Infinity" prefWidth="200.0" promptText="Username"/>
+            <TextField fx:id="passwordField" maxWidth="-Infinity" prefWidth="200.0" promptText="Password"/>
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" text="Log in"/>
+            <Label text="Don't have an account? Sign up -&gt;" textFill="WHITE"/>
+            <Label fx:id="loginMsg" textFill="#e67e22"/>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="35.0" right="35.0" top="10.0"/>
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

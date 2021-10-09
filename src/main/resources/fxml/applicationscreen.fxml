@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="237.0" prefHeight="80.0" prefWidth="555.0"
+            style="-fx-background-color: #34495e;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+            AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Domibros" textFill="#ecf0f1">
+               <HBox.margin>
+                  <Insets left="100.0"/>
+               </HBox.margin>
+               <font>
+                  <Font size="24.0"/>
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="100.0"/>
+         </padding>
+      </HBox>
+      <VBox prefHeight="520.0" prefWidth="555.0"
+            style="-fx-border-style: hidden solid none none; -fx-border-width: 1px; -fx-border-color: #bdc3c7;"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="15.0"
+                  style="-fx-border-style: hidden none solid none; -fx-border-color: #34495e; -fx-border-width: 1px;">
+               <children>
+                  <Button fx:id="pizzaMenuButton" mnemonicParsing="false" onAction="#openPizzaMenu" text="Pizzas"/>
+                  <Button fx:id="dessertMenuButton" mnemonicParsing="false" onAction="#openDessertMenu"
+                          text="Desserts"/>
+                  <Button fx:id="drinkMenuButton" mnemonicParsing="false" onAction="#openDrinksMenu" text="Drinks"/>
+               </children>
+               <padding>
+                  <Insets left="25.0"/>
+               </padding>
+            </HBox>
+            <FlowPane fx:id="menuProductContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS"/>
+         </children>
+      </VBox>
+      <VBox prefHeight="520.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
+            AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="viewProfileButton" mnemonicParsing="false" onAction="#viewProfile" text="Profile"/>
+               </children>
+               <padding>
+                  <Insets right="30.0"/>
+               </padding>
+            </HBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Cart">
+                     <font>
+                        <Font size="24.0"/>
+                     </font>
+                  </Label>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="239.0" prefWidth="237.0"
+                              style="-fx-background-color: transparent;">
+                     <content>
+                        <VBox fx:id="ordersList" alignment="TOP_CENTER" prefWidth="243.0" spacing="10.0">
+                           <padding>
+                              <Insets top="10.0"/>
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <HBox alignment="CENTER_LEFT" spacing="100.0">
+                     <children>
+                        <Label text="Total"/>
+                        <Label fx:id="orderTotal" contentDisplay="RIGHT" text="100">
+                           <graphic>
+                              <Label text="euro"/>
+                           </graphic>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="30.0"/>
+                     </padding>
+                  </HBox>
+                  <Button fx:id="orderButton" mnemonicParsing="false" onAction="#makeOrder" text="Order"/>
+               </children>
+               <padding>
+                  <Insets left="3.0" top="20.0"/>
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
