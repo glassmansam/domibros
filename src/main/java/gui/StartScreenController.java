@@ -76,6 +76,8 @@ public class StartScreenController {
             String postcode = postcodeField.getText();
             String city = cityField.getText();
 
+            //yeah to register you need to fill out the login form lol.
+            //Probably should find a better solution for this eventually
             String password = passwordField.getText();
             String username = usernameField.getText();
 
@@ -92,16 +94,14 @@ public class StartScreenController {
 
             //for some reason it complains if we don't call "rs.next()" before trying to read from the result set
             int address_id = rs.next() ? rs.getInt(1) : 0; //if rs.next() is true, then address_id = rs.getInt(), otherwise address_id = 0
-            System.out.println(address_id);
 
             //insert the customer into the customer database
             String query2 = "INSERT INTO customer (username, password, first_name, last_name, phone_number, address_id) VALUES " +
                     "('" + username + "', '" + password + "', '" + firstname + "', '" + lastname + "', '" + phoneNumber + "', '" + address_id + "')";
             statement.execute(query2);
 
+            //login after registration
             login(event);
-            //got to the application screen
-            //goToApplication();
 
         } catch (Exception a) {
             a.printStackTrace();
@@ -111,11 +111,13 @@ public class StartScreenController {
 
     @FXML
     void login(ActionEvent event) throws IOException {
-        //blablabal get sql stuff
+
+        //ideally we use an "API" class that just has SQL methods that lets us do what we gotta do
 
         String password = passwordField.getText();
         String username = usernameField.getText();
 
+        //very hacky below, maybe better to use a join query but I didn't feel like googling the syntax
         try {
             Statement statement = connection.createStatement();
             String getUser = "SELECT * FROM customer WHERE username = '" + username + "' AND password = '" + password + "'";
@@ -158,6 +160,7 @@ public class StartScreenController {
 
     private void goToApplication(Customer customer) throws IOException {
         ApplicationController appController = new ApplicationController(customer);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/applicationscreen.fxml"));
         loader.setController(appController);
 
