@@ -10,14 +10,14 @@ public class Main {
 
     public static void main(String[] args) {
         Connection connection = null;
-        Properties properties = new Properties();
-        properties.setProperty("user", "root");
-        properties.setProperty("password", "root");
-        properties.setProperty("useSSL", "false");
+//        Properties properties = new Properties();
+//        properties.setProperty("user", "root");
+//        properties.setProperty("password", "root");
+//        properties.setProperty("useSSL", "false");
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:8080/domibros", properties);
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/domibros?user=root&password=root&serverTimezone=Europe/Rome");
 
 
         } catch (Exception e) {
@@ -40,47 +40,54 @@ public class Main {
             e.printStackTrace();
         }
     }
-public static void logOption(Connection connection){
+
+    public static void logOption(Connection connection) {
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Log in or register now!");
         panel.add(label);
-        String[] options = {"Log in!","Register!"};
-    int option = JOptionPane.showOptionDialog(null, panel, "Enter your login credentials", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
-    if(option==0){logIn(connection);}
-    if(option==1){register(connection);}
-}
-public static void register(Connection connection){
-    JPanel panel = new JPanel();
-    JLabel label = new JLabel("Put in your data please!");
-    panel.add(label);
-    JTextField first_nameR = new JTextField(30);
-    JTextField last_nameR = new JTextField(30);
-    JTextField usernameR = new JTextField(30);
-    JPasswordField passwordR = new JPasswordField(30);
-    JTextField phone_numberR = new JTextField(14);
-    JButton button = new JButton("Click me!");
-    panel.add(first_nameR);
-    panel.add(last_nameR);
-    panel.add(usernameR);
-    panel.add(passwordR);
-    panel.add(phone_numberR);
-    button.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent e) {
-            String first_name = first_nameR.getText();
-            String last_name = last_nameR.getText();
-            String username = usernameR.getText();
-            String password = passwordR.getPassword().toString();
-            int phone_number=Integer.parseInt(phone_numberR.getText());
-            String query = "INSERT INTO customer (username, password,first_name,last_name,phone_number) VALUES ('" + username + "','" + password + "','" + first_name + "','" + last_name + "','" + phone_number + "')";
-            try (Statement stmt = connection.createStatement()) {
-                stmt.execute(query);
-            } catch (Exception a) {
-                a.printStackTrace();
-            }
+        String[] options = {"Log in!", "Register!"};
+        int option = JOptionPane.showOptionDialog(null, panel, "Enter your login credentials", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+        if (option == 0) {
+            logIn(connection);
         }
-    });
-    panel.add(button);
+        if (option == 1) {
+            register(connection);
+        }
     }
+
+    public static void register(Connection connection) {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("Put in your data please!");
+        panel.add(label);
+        JTextField first_nameR = new JTextField(30);
+        JTextField last_nameR = new JTextField(30);
+        JTextField usernameR = new JTextField(30);
+        JPasswordField passwordR = new JPasswordField(30);
+        JTextField phone_numberR = new JTextField(14);
+        JButton button = new JButton("Click me!");
+        panel.add(first_nameR);
+        panel.add(last_nameR);
+        panel.add(usernameR);
+        panel.add(passwordR);
+        panel.add(phone_numberR);
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String first_name = first_nameR.getText();
+                String last_name = last_nameR.getText();
+                String username = usernameR.getText();
+                String password = passwordR.getPassword().toString();
+                int phone_number = Integer.parseInt(phone_numberR.getText());
+                String query = "INSERT INTO customer (username, password,first_name,last_name,phone_number) VALUES ('" + username + "','" + password + "','" + first_name + "','" + last_name + "','" + phone_number + "')";
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute(query);
+                } catch (Exception a) {
+                    a.printStackTrace();
+                }
+            }
+        });
+        panel.add(button);
+    }
+
     public static void logIn(Connection connection) {
         username = "";
         password = "";
@@ -97,14 +104,13 @@ public static void register(Connection connection){
             username = userName.getText();
             password = new String(passWord.getPassword());
         }
-        String query = "INSERT INTO customer (username, password) VALUES ('"+username+"','"+password+"')";
+        String query = "INSERT INTO customer (username, password) VALUES ('" + username + "','" + password + "')";
 
         try (Statement stmt = connection.createStatement()) {
-             stmt.execute(query);
-            }
-        catch (Exception e) {
+            stmt.execute(query);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    }
+}
 
