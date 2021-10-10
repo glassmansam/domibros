@@ -72,9 +72,9 @@
                   <ScrollPane hbarPolicy="NEVER" prefHeight="239.0" prefWidth="237.0"
                               style="-fx-background-color: transparent;">
                      <content>
-                        <VBox fx:id="ordersList" alignment="TOP_CENTER" prefWidth="243.0" spacing="10.0">
+                        <VBox fx:id="ordersList" prefWidth="243.0" spacing="10.0">
                            <padding>
-                              <Insets top="10.0"/>
+                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0"/>
                            </padding>
                         </VBox>
                      </content>
