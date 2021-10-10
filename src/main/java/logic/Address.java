@@ -28,9 +28,7 @@ public class Address {
         return postocde;
     }
 
-    public String getCity() throws IOException {
-        MenuItem item = new MenuItem("sfdasdsd", 0);
-        double price = item.price;
+    public String getCity() {
         return city;
     }
 }
