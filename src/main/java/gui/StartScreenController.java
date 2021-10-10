@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import logic.Address;
 import logic.Customer;
+import logic.DatabaseAPI;
 
 import java.io.IOException;
 import java.sql.*;
@@ -63,6 +64,7 @@ public class StartScreenController {
             loginMsg.setText("Unable to connect to database");
             e.printStackTrace();
         }
+
     }
 
     @FXML
@@ -81,26 +83,8 @@ public class StartScreenController {
             String password = passwordField.getText();
             String username = usernameField.getText();
 
-            Statement statement = connection.createStatement();
+            DatabaseAPI.addUser(firstname,lastname,phoneNumber,street,postcode,city,password,username);
 
-            //first insert the address since we need the address ID for the customer
-            String insertAddress = "INSERT INTO address (street, post_code, city) values " +
-                    "('" + street + "','" + postcode + "','" + city + "') ";
-
-            statement.execute(insertAddress);
-
-            //now lets get the latest address ID, which is the auto-incremented value of the last insert query that we just did
-            ResultSet rs = statement.executeQuery("SELECT LAST_INSERT_ID()");
-
-            //for some reason it complains if we don't call "rs.next()" before trying to read from the result set
-            int address_id = rs.next() ? rs.getInt(1) : 0; //if rs.next() is true, then address_id = rs.getInt(), otherwise address_id = 0
-
-            //insert the customer into the customer database
-            String query2 = "INSERT INTO customer (username, password, first_name, last_name, phone_number, address_id) VALUES " +
-                    "('" + username + "', '" + password + "', '" + firstname + "', '" + lastname + "', '" + phoneNumber + "', '" + address_id + "')";
-            statement.execute(query2);
-
-            //login after registration
             login(event);
 
         } catch (Exception a) {
@@ -119,9 +103,7 @@ public class StartScreenController {
 
         //very hacky below, maybe better to use a join query but I didn't feel like googling the syntax
         try {
-            Statement statement = connection.createStatement();
-            String getUser = "SELECT * FROM customer WHERE username = '" + username + "' AND password = '" + password + "'";
-            ResultSet results = statement.executeQuery(getUser);
+            ResultSet results = DatabaseAPI.getUser(username,password);
 
             if (results.next()) {
                 int customerID = results.getInt("id");
@@ -132,8 +114,7 @@ public class StartScreenController {
 
                 int addressID = results.getInt("address_id");
 
-                String getAddress = "SELECT * FROM address WHERE address_id = '" + addressID + "'";
-                ResultSet addressResult = statement.executeQuery(getAddress);
+                ResultSet addressResult = DatabaseAPI.getAddress(addressID);
 
                 if (addressResult.next()) {
                     String street = addressResult.getString("street");
