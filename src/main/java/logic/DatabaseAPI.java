@@ -1,6 +1,8 @@
 package logic;
 
+import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseAPI {
     static Connection connection = null;
@@ -8,8 +10,8 @@ public class DatabaseAPI {
     static {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            statement = connection.createStatement();
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/domibros?user=root&password=root&serverTimezone=Europe/Rome");
+            statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -19,6 +21,28 @@ public class DatabaseAPI {
         String getAddress = "SELECT * FROM address WHERE address_id = '" + id + "'";
         return  statement.executeQuery(getAddress);
 
+    }
+    public static ResultSet getPizzas()throws SQLException{
+        String query = "SELECT * FROM pizza";
+        return statement.executeQuery(query);
+    }
+    public static String[] getToppings(int id) throws SQLException {
+        ArrayList<String> toppings = new ArrayList();
+        statement = connection.createStatement();
+        String query = "SELECT * FROM topping INNER JOIN pizza_topping ON topping.topping_id = pizza_topping.topping_id WHERE pizza_topping.pizza_id='"+id+"'";
+        ResultSet rs =statement.executeQuery(query);
+        while(rs.next()) {
+            toppings.add(rs.getString("name"));
+        }
+        return toppings.toArray(new String[0]);
+    }
+    public static ResultSet getDrinks()throws SQLException{
+        String query = "SELECT * FROM drink";
+        return statement.executeQuery(query);
+    }
+    public static ResultSet getDesserts()throws SQLException{
+        String query = "SELECT * FROM dessert";
+        return statement.executeQuery(query);
     }
     public static ResultSet getUser(String username, String password) throws SQLException {
         String getUser = "SELECT * FROM customer WHERE username = '" + username + "' AND password = '" + password + "'";

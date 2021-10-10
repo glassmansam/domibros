@@ -14,6 +14,7 @@ public class MenuItem extends VBox {
 
     private String name;
     private double price;
+    private String image;
 
     @FXML
     private ImageView productImage;
@@ -24,11 +25,21 @@ public class MenuItem extends VBox {
     @FXML
     private Label itemPrice;
 
-    public MenuItem(String name, double price) throws IOException {
+    public MenuItem(String name, double price,String image) throws IOException {
         super();
         this.name = name;
         this.price = price;
-
+        this.image = image;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
+        loader.setController(this);
+        loader.setRoot(this);
+        loader.load();
+    }
+    public MenuItem(String name, double price,String image,String[] toppings) throws IOException {
+        super();
+        this.name = name;
+        this.price = price;
+        this.image = image;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
         loader.setController(this);
         loader.setRoot(this);

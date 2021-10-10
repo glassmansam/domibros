@@ -7,8 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import logic.Customer;
+import logic.DatabaseAPI;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ApplicationController {
 
@@ -60,13 +64,9 @@ public class ApplicationController {
     private Button orderButton;
 
     @FXML
-    void initialize() throws IOException {
+    void initialize() throws IOException, SQLException {
         viewProfileButton.setText(customer.getUsername());
-
-        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
-        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
-        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
-        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
+        openPizzaMenu(new ActionEvent());
 
     }
 
@@ -76,18 +76,30 @@ public class ApplicationController {
     }
 
     @FXML
-    void openDessertMenu(ActionEvent event) {
-
+    void openDessertMenu(ActionEvent event) throws SQLException, IOException {
+menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
+        ResultSet desserts = DatabaseAPI.getDesserts();
+        while(desserts.next()){
+            menuProductContainer.getChildren().add(new MenuItem(desserts.getString("name"),desserts.getDouble("price"),desserts.getString("image")));
+        }
     }
 
     @FXML
-    void openDrinksMenu(ActionEvent event) {
-
+    void openDrinksMenu(ActionEvent event) throws SQLException, IOException {
+        menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
+        ResultSet drinks = DatabaseAPI.getDrinks();
+        while(drinks.next()){
+            menuProductContainer.getChildren().add(new MenuItem(drinks.getString("name"),drinks.getDouble("price"),drinks.getString("image")));
+        }
     }
 
     @FXML
-    void openPizzaMenu(ActionEvent event) {
-
+    void openPizzaMenu(ActionEvent event) throws SQLException, IOException {
+        menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
+        ResultSet pizzas = DatabaseAPI.getPizzas();
+        while(pizzas.next()){
+            menuProductContainer.getChildren().add(new MenuItem(pizzas.getString("name"),pizzas.getDouble("price"),pizzas.getString("image"), DatabaseAPI.getToppings(pizzas.getInt("pizza_id"))));
+        }
     }
 
     @FXML
