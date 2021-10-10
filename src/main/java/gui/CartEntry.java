@@ -10,17 +10,19 @@ import java.io.IOException;
 
 public class CartEntry extends HBox {
 
-    private String name;
-    private String price;
+    public final String name;
+    public double price;
 
-    public CartEntry(String name, String price) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
-        loader.setController(this);
-        loader.setRoot(this);
-        loader.load();
+    public CartEntry(String name, double price) throws IOException {
+        super();
 
         this.name = name;
         this.price = price;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cartentry.fxml"));
+        loader.setController(this);
+        loader.setRoot(this);
+        loader.load();
     }
 
     @FXML
@@ -34,12 +36,13 @@ public class CartEntry extends HBox {
 
     @FXML
     void removeFromCart(MouseEvent event) {
-
+        ApplicationController.APP.removeFromCart(this);
     }
 
     @FXML
     void initialize() {
-
+        productName.setText(name);
+        productPrice.setText(price + "");
     }
 
 

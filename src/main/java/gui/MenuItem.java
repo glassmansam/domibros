@@ -12,6 +12,9 @@ import java.io.IOException;
 
 public class MenuItem extends VBox {
 
+    private String name;
+    private double price;
+
     @FXML
     private ImageView productImage;
 
@@ -21,20 +24,28 @@ public class MenuItem extends VBox {
     @FXML
     private Label itemPrice;
 
-    public MenuItem() throws IOException {
+    public MenuItem(String name, double price) throws IOException {
+        super();
+        this.name = name;
+        this.price = price;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
         loader.setController(this);
         loader.setRoot(this);
         loader.load();
+
     }
 
     @FXML
     void initialize() {
         productImage.setImage(new Image("/images/pizza_caprese.png"));
+        productName.setText(name);
+        itemPrice.setText(price + "");
     }
 
     @FXML
-    void addToCart(MouseEvent event) {
-
+    void addToCart(MouseEvent event) throws IOException {
+        CartEntry entry = new CartEntry(name, price);
+        ApplicationController.APP.addToCart(entry);
     }
 }

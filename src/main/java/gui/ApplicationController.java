@@ -12,10 +12,27 @@ import java.io.IOException;
 
 public class ApplicationController {
 
+    public static ApplicationController APP = null;
+
     private final Customer customer;
 
     public ApplicationController(Customer customer) {
         this.customer = customer;
+        APP = this;
+    }
+
+    public void addToCart(CartEntry item) {
+        ordersList.getChildren().add(item);
+        double total = Double.parseDouble(orderTotal.getText());
+        total += item.price;
+        orderTotal.setText(total + "");
+    }
+
+    public void removeFromCart(CartEntry item) {
+        ordersList.getChildren().remove(item);
+        double total = Double.parseDouble(orderTotal.getText());
+        total -= item.price;
+        orderTotal.setText(total + "");
     }
 
     @FXML
@@ -46,23 +63,11 @@ public class ApplicationController {
     void initialize() throws IOException {
         viewProfileButton.setText(customer.getUsername());
 
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
-        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
+        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
+        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
+        menuProductContainer.getChildren().add(new MenuItem("Caprese", 9));
+
     }
 
     @FXML

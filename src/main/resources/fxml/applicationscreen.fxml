@@ -82,7 +82,7 @@
                   <HBox alignment="CENTER_LEFT" spacing="100.0">
                      <children>
                         <Label text="Total"/>
-                        <Label fx:id="orderTotal" contentDisplay="RIGHT" text="100">
+                        <Label fx:id="orderTotal" contentDisplay="RIGHT" text="0">
                            <graphic>
                               <Label text="euro"/>
                            </graphic>
