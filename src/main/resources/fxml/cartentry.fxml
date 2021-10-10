@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.HBox?>
@@ -13,6 +12,10 @@
          </cursor>
       </Label>
       <Label fx:id="productName" text="Pizza"/>
-      <Label fx:id="productPrice" text="Price"/>
+      <Label fx:id="productPrice" text="Price">
+         <graphic>
+            <Label text="€"/>
+         </graphic>
+      </Label>
    </children>
 </fx:root>

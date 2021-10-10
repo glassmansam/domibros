@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class MenuItem extends VBox {
 
-    private String name;
-    private double price;
+    String name;
+    public double price;
 
     @FXML
     private ImageView productImage;
