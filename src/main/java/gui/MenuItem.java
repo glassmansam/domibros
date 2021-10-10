@@ -7,14 +7,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import logic.Type;
 
 import java.io.IOException;
 
 public class MenuItem extends VBox {
 
-    String name;
-    public double price;
-
+    private String name;
+    private double price;
+    private String image;
+    private Type type;
+    private int id;
     @FXML
     private ImageView productImage;
 
@@ -24,11 +27,25 @@ public class MenuItem extends VBox {
     @FXML
     private Label itemPrice;
 
-    public MenuItem(String name, double price) throws IOException {
+    public MenuItem(String name, double price,String image,Type type,int id) throws IOException {
         super();
+        this.id=id;
+        this.type=type;
         this.name = name;
         this.price = price;
-
+        this.image = image;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
+        loader.setController(this);
+        loader.setRoot(this);
+        loader.load();
+    }
+    public MenuItem(String name, double price,String image,String[] toppings,Type type,int id) throws IOException {
+        super();
+        this.type = type;
+        this.id=id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
         loader.setController(this);
         loader.setRoot(this);
@@ -45,7 +62,7 @@ public class MenuItem extends VBox {
 
     @FXML
     void addToCart(MouseEvent event) throws IOException {
-        CartEntry entry = new CartEntry(name, price);
+        CartEntry entry = new CartEntry(name, price,type,id);
         ApplicationController.APP.addToCart(entry);
     }
 }
