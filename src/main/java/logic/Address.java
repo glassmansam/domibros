@@ -1,5 +1,9 @@
 package logic;
 
+import gui.MenuItem;
+
+import java.io.IOException;
+
 public class Address {
 
     private final int addressID;
@@ -24,7 +28,9 @@ public class Address {
         return postocde;
     }
 
-    public String getCity() {
+    public String getCity() throws IOException {
+        MenuItem item = new MenuItem("sfdasdsd", 0);
+        double price = item.price;
         return city;
     }
 }
