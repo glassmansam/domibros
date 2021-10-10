@@ -8,6 +8,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import logic.Customer;
 
+import java.io.IOException;
+
 public class ApplicationController {
 
     private final Customer customer;
@@ -41,8 +43,26 @@ public class ApplicationController {
     private Button orderButton;
 
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
         viewProfileButton.setText(customer.getUsername());
+
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
+        menuProductContainer.getChildren().add(new MenuItem());
     }
 
     @FXML

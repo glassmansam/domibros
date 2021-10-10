@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.HBox?>
+<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         spacing="25.0" type="HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="removeButton" onMouseClicked="#removeFromCart" text="🗙">
+         <cursor>
+            <Cursor fx:constant="HAND"/>
+         </cursor>
+      </Label>
+      <Label fx:id="productName" text="Pizza"/>
+      <Label fx:id="productPrice" text="Price"/>
+   </children>
+</fx:root>

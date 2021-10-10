@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -41,7 +40,15 @@
                   <Insets left="25.0"/>
                </padding>
             </HBox>
-            <FlowPane fx:id="menuProductContainer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS"/>
+            <ScrollPane hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+               <content>
+                  <FlowPane fx:id="menuProductContainer" hgap="15.0" prefHeight="454.0" prefWidth="552.0" vgap="15.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                     </padding>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
          </children>
       </VBox>
       <VBox prefHeight="520.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
