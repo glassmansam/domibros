@@ -20,6 +20,7 @@ public class Domibros extends Application {
         Scene scene = new Scene(root);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
+        stage.setTitle("Domibros Pizza Service");
         primaryStage.show();
         stage = primaryStage;
     }

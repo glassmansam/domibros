@@ -34,6 +34,9 @@ public class ApplicationController {
         double total = Double.parseDouble(orderTotal.getText());
         total += item.price;
         orderTotal.setText(total + "");
+
+        if (item.getType() == PIZZA)
+            orderMessage.setText("");
     }
 
     public void removeFromCart(CartEntry item) {
@@ -100,7 +103,7 @@ public class ApplicationController {
         if (correctOrder) {
             //DO ALL ORDER STUFF WITH IT!!
         } else {
-            //ERROR MSG
+            orderMessage.setText("You must have at least one pizza per order!");
         }
     }
 
