@@ -2,8 +2,9 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -31,10 +32,21 @@
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="15.0"
                   style="-fx-border-style: hidden none solid none; -fx-border-color: #34495e; -fx-border-width: 1px;">
                <children>
-                  <Button fx:id="pizzaMenuButton" mnemonicParsing="false" onAction="#openPizzaMenu" text="Pizzas"/>
-                  <Button fx:id="dessertMenuButton" mnemonicParsing="false" onAction="#openDessertMenu"
-                          text="Desserts"/>
-                  <Button fx:id="drinkMenuButton" mnemonicParsing="false" onAction="#openDrinksMenu" text="Drinks"/>
+                  <Button fx:id="pizzaMenuButton" mnemonicParsing="false" onAction="#openPizzaMenu" text="Pizzas">
+                     <cursor>
+                        <Cursor fx:constant="HAND"/>
+                     </cursor>
+                  </Button>
+                  <Button fx:id="dessertMenuButton" mnemonicParsing="false" onAction="#openDessertMenu" text="Desserts">
+                     <cursor>
+                        <Cursor fx:constant="HAND"/>
+                     </cursor>
+                  </Button>
+                  <Button fx:id="drinkMenuButton" mnemonicParsing="false" onAction="#openDrinksMenu" text="Drinks">
+                     <cursor>
+                        <Cursor fx:constant="HAND"/>
+                     </cursor>
+                  </Button>
                </children>
                <padding>
                   <Insets left="25.0"/>
@@ -56,7 +68,11 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="viewProfileButton" mnemonicParsing="false" onAction="#viewProfile" text="Profile"/>
+                  <Button fx:id="viewProfileButton" mnemonicParsing="false" onAction="#viewProfile" text="Profile">
+                     <cursor>
+                        <Cursor fx:constant="HAND"/>
+                     </cursor>
+                  </Button>
                </children>
                <padding>
                   <Insets right="30.0"/>
@@ -82,20 +98,36 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER_LEFT" spacing="100.0">
+                  <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Label text="Total"/>
-                        <Label fx:id="orderTotal" contentDisplay="RIGHT" text="0">
+                        <Label text="Total:">
+                           <font>
+                              <Font size="18.0"/>
+                           </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="orderTotal" text="0">
                            <graphic>
-                              <Label text="euro"/>
+                              <Label text="€">
+                                 <font>
+                                    <Font size="18.0"/>
+                                 </font>
+                              </Label>
                            </graphic>
+                           <font>
+                              <Font size="18.0"/>
+                           </font>
                         </Label>
                      </children>
                      <padding>
-                        <Insets left="30.0"/>
+                        <Insets left="30.0" right="30.0"/>
                      </padding>
                   </HBox>
-                  <Button fx:id="orderButton" mnemonicParsing="false" onAction="#makeOrder" text="Order"/>
+                  <Button fx:id="orderButton" mnemonicParsing="false" onAction="#makeOrder" text="Order">
+                     <cursor>
+                        <Cursor fx:constant="HAND"/>
+                     </cursor>
+                  </Button>
                   <Label text="All prices include 9% VAT" textFill="#7f8c8d"/>
                   <Label fx:id="orderMessage" textFill="#d35400" wrapText="true">
                      <VBox.margin>
