@@ -15,6 +15,9 @@ public class CartEntry extends HBox {
     public double price;
     private final Type type;
     private final int id;
+    public int getIdentifier(){
+        return this.id;
+    }
 
     public CartEntry(String name, double price, Type type, int id) throws IOException {
         super();

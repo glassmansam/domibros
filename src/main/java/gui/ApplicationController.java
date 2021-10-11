@@ -91,7 +91,7 @@ public class ApplicationController {
     }
 
     @FXML
-    void makeOrder(ActionEvent event) {
+    void makeOrder(ActionEvent event) throws SQLException {
         boolean correctOrder = false;
         CartEntry[] entries = ordersList.getChildren().toArray(new CartEntry[0]);
         for (CartEntry entry : entries) {
@@ -101,6 +101,10 @@ public class ApplicationController {
             }
         }
         if (correctOrder) {
+        int order_id=DatabaseAPI.makeOrderAndGetId(customer.getAddress().getAddressID(),customer.getCustomerID());
+        for(CartEntry entry : entries){
+DatabaseAPI.addOrders(entry,order_id);
+        }
             //DO ALL ORDER STUFF WITH IT!!
         } else {
             orderMessage.setText("You must have at least one pizza per order!");

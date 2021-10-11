@@ -1,5 +1,7 @@
 package logic;
 
+import gui.CartEntry;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -26,6 +28,28 @@ public class DatabaseAPI {
     public static ResultSet getPizzas() throws SQLException {
         String query = "SELECT * FROM pizza";
         return statement.executeQuery(query);
+    }
+    public static int makeOrderAndGetId(int address_id, int customer_id) throws SQLException {
+        String query = "INSERT INTO orders (address_id,customer_id) VALUES"+"('"+address_id+"','"+customer_id+"')";
+        statement.execute(query);
+        ResultSet rs = statement.executeQuery("SELECT LAST_INSERT_ID()");
+        int order_id = rs.next() ? rs.getInt(1):0;
+        return order_id;
+    }
+    public static void addOrders(CartEntry item,int order_id) throws SQLException {
+        if(item.getType()==Type.PIZZA){
+            String query = "INSERT INTO order_pizza (order_id,pizza_id) VALUES" + "('"+order_id+"','"+item.getIdentifier()+"')";
+           statement.execute(query);
+        }
+        if(item.getType()==Type.DESSERT){
+           String query = "INSERT INTO order_dessert (order_id,dessert_id) VALUES" + "('"+order_id+"','"+item.getIdentifier()+"')";
+            statement.execute(query);
+        }
+        if(item.getType()==Type.DRINK){
+            String query = "INSERT INTO order_drink (order_id,drink_id) VALUES" + "('"+order_id+"','"+item.getIdentifier()+"')";
+            statement.execute(query);
+        }
+
     }
 
     public static String[] getToppings(int id) throws SQLException {
