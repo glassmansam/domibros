@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <fx:root alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-         onMouseClicked="#addToCart" prefWidth="160.0" spacing="5.0" type="VBox" xmlns="http://javafx.com/javafx/16"
+         onMouseClicked="#addToCart" prefWidth="180.0" spacing="5.0" type="VBox" xmlns="http://javafx.com/javafx/16"
          xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="productImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true"/>
@@ -19,18 +20,33 @@
                <padding>
                   <Insets left="10.0" right="10.0"/>
                </padding>
+               <font>
+                  <Font size="18.0"/>
+               </font>
             </Label>
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="itemPrice" text="Price">
                <graphic>
-                  <Label text="€"/>
+                  <Label text="€">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Label>
                </graphic>
                <HBox.margin>
                   <Insets right="10.0"/>
                </HBox.margin>
+               <font>
+                  <Font size="18.0"/>
+               </font>
             </Label>
          </children>
       </HBox>
+      <FlowPane fx:id="toppingsContainer" hgap="5.0" prefWrapLength="160.0" vgap="5.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+         </padding>
+      </FlowPane>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

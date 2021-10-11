@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import logic.Type;
 
@@ -28,6 +29,9 @@ public class MenuItem extends VBox {
 
     @FXML
     private Label itemPrice;
+
+    @FXML
+    private FlowPane toppingsContainer;
 
     public MenuItem(String name, double price, String image, Type type, int id) throws IOException {
         this(name, price, image, new String[0], type, id);
@@ -55,6 +59,11 @@ public class MenuItem extends VBox {
         } catch (Exception e) {
             productImage.setImage(new Image("/images/pizzas/pizza_caprese.png"));
         }
+
+        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
+        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
+        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
+        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
 
         productName.setText(name);
         itemPrice.setText(price + "");

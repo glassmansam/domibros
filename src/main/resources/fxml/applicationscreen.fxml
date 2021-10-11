@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+            prefWidth="850.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="237.0" prefHeight="80.0" prefWidth="555.0"
             style="-fx-background-color: #34495e;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -25,7 +25,7 @@
             <Insets left="100.0"/>
          </padding>
       </HBox>
-      <VBox prefHeight="520.0" prefWidth="555.0"
+      <VBox prefHeight="520.0" prefWidth="606.0"
             style="-fx-border-style: hidden solid none none; -fx-border-width: 1px; -fx-border-color: #bdc3c7;"
             AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="80.0">
          <children>
@@ -54,7 +54,9 @@
             </HBox>
             <ScrollPane hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
                <content>
-                  <FlowPane fx:id="menuProductContainer" hgap="15.0" prefHeight="454.0" prefWidth="552.0" vgap="15.0">
+                  <FlowPane fx:id="menuProductContainer" columnHalignment="CENTER" hgap="15.0" prefHeight="454.0"
+                            prefWidth="600.0" prefWrapLength="600.0" style="-fx-background-color: transparent;"
+                            vgap="15.0">
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                      </padding>
