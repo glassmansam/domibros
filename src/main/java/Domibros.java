@@ -17,9 +17,10 @@ public class Domibros extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/startscreen.fxml"));
         Scene scene = new Scene(root);
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Domibros Pizza Service");
         primaryStage.show();
+
     }
 }

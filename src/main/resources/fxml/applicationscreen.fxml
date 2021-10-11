@@ -27,7 +27,8 @@
       </HBox>
       <VBox prefHeight="520.0" prefWidth="606.0"
             style="-fx-border-style: hidden solid none none; -fx-border-width: 1px; -fx-border-color: #bdc3c7;"
-            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="80.0">
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="248.0"
+            AnchorPane.topAnchor="80.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="15.0"
                   style="-fx-border-style: hidden none solid none; -fx-border-color: #34495e; -fx-border-width: 1px;">

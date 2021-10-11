@@ -148,6 +148,8 @@ public class StartScreenController {
         Scene scene = new Scene(loader.load());
         Stage stage = (Stage) loginButton.getScene().getWindow();
         stage.setScene(scene);
+        stage.setMinWidth(865);
+        stage.setMinHeight(620);
     }
 
 
