@@ -33,6 +33,7 @@ public class MenuItem extends VBox {
         this(name, price, image, new String[0], type, id);
     }
 
+
     public MenuItem(String name, double price, String image, String[] toppings, Type type, int id) throws IOException {
         super();
         this.id = id;
