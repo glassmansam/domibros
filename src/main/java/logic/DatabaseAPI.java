@@ -53,7 +53,7 @@ public class DatabaseAPI {
     }
 
     public static String[] getToppings(int id) throws SQLException {
-        ArrayList<String> toppings = new ArrayList();
+        ArrayList<String> toppings = new ArrayList<>();
         statement = connection.createStatement();
         String query = "SELECT * FROM topping INNER JOIN pizza_topping ON topping.topping_id = pizza_topping.topping_id WHERE pizza_topping.pizza_id='" + id + "'";
         ResultSet rs = statement.executeQuery(query);
