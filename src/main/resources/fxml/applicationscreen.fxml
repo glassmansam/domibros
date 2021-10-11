@@ -72,10 +72,13 @@
                   <ScrollPane hbarPolicy="NEVER" prefHeight="239.0" prefWidth="237.0"
                               style="-fx-background-color: transparent;">
                      <content>
-                        <VBox fx:id="ordersList" prefWidth="243.0" spacing="10.0">
+                        <VBox fx:id="ordersList" fillWidth="false" prefWidth="243.0" spacing="10.0">
                            <padding>
                               <Insets bottom="10.0" left="15.0" right="10.0" top="10.0"/>
                            </padding>
+                           <children>
+                              <Label fx:id="emptyCartHint" text="Click on a product to add to cart" textFill="#7f8c8d"/>
+                           </children>
                         </VBox>
                      </content>
                   </ScrollPane>
@@ -93,6 +96,8 @@
                      </padding>
                   </HBox>
                   <Button fx:id="orderButton" mnemonicParsing="false" onAction="#makeOrder" text="Order"/>
+                  <Label text="All prices include 9% VAT" textFill="#7f8c8d"/>
+                  <Label fx:id="orderMessage"/>
                </children>
                <padding>
                   <Insets left="3.0" top="20.0"/>

@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import logic.Customer;
 import logic.DatabaseAPI;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +28,8 @@ public class ApplicationController {
     }
 
     public void addToCart(CartEntry item) {
+        ordersList.getChildren().remove(emptyCartHint);
+
         ordersList.getChildren().add(item);
         double total = Double.parseDouble(orderTotal.getText());
         total += item.price;
@@ -40,6 +41,10 @@ public class ApplicationController {
         double total = Double.parseDouble(orderTotal.getText());
         total -= item.price;
         orderTotal.setText(total + "");
+
+        if (ordersList.getChildren().size() == 0) {
+            ordersList.getChildren().add(emptyCartHint);
+        }
     }
 
     @FXML
@@ -70,6 +75,12 @@ public class ApplicationController {
     private Button orderButton;
 
     @FXML
+    private Label orderMessage;
+
+    @FXML
+    private Label emptyCartHint;
+
+    @FXML
     void initialize() throws IOException, SQLException {
         viewProfileButton.setText(customer.getUsername());
         openPizzaMenu(new ActionEvent());
@@ -78,28 +89,27 @@ public class ApplicationController {
 
     @FXML
     void makeOrder(ActionEvent event) {
-        boolean correctOrder=false;
-    CartEntry[] entries = ordersList.getChildren().toArray(new CartEntry[0]);
+        boolean correctOrder = false;
+        CartEntry[] entries = ordersList.getChildren().toArray(new CartEntry[0]);
         for (CartEntry entry : entries) {
             if (entry.getType() == PIZZA) {
                 correctOrder = true;
                 break;
             }
         }
-    if(correctOrder){
-        //DO ALL ORDER STUFF WITH IT!!
-    }
-    else{
-        //ERROR MSG
-    }
+        if (correctOrder) {
+            //DO ALL ORDER STUFF WITH IT!!
+        } else {
+            //ERROR MSG
+        }
     }
 
     @FXML
     void openDessertMenu(ActionEvent event) throws SQLException, IOException {
-menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
+        menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
         ResultSet desserts = DatabaseAPI.getDesserts();
-        while(desserts.next()){
-            menuProductContainer.getChildren().add(new MenuItem(desserts.getString("name"),desserts.getDouble("price"),desserts.getString("image"),DESSERT,desserts.getInt("dessert_id")));
+        while (desserts.next()) {
+            menuProductContainer.getChildren().add(new MenuItem(desserts.getString("name"), desserts.getDouble("price"), desserts.getString("image"), DESSERT, desserts.getInt("dessert_id")));
         }
     }
 
@@ -107,8 +117,8 @@ menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren())
     void openDrinksMenu(ActionEvent event) throws SQLException, IOException {
         menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
         ResultSet drinks = DatabaseAPI.getDrinks();
-        while(drinks.next()){
-            menuProductContainer.getChildren().add(new MenuItem(drinks.getString("name"),drinks.getDouble("price"),drinks.getString("image"),DRINK,drinks.getInt("drink_id")));
+        while (drinks.next()) {
+            menuProductContainer.getChildren().add(new MenuItem(drinks.getString("name"), drinks.getDouble("price"), drinks.getString("image"), DRINK, drinks.getInt("drink_id")));
         }
     }
 
@@ -116,8 +126,8 @@ menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren())
     void openPizzaMenu(ActionEvent event) throws SQLException, IOException {
         menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
         ResultSet pizzas = DatabaseAPI.getPizzas();
-        while(pizzas.next()){
-            menuProductContainer.getChildren().add(new MenuItem(pizzas.getString("name"),pizzas.getDouble("price"),pizzas.getString("image"), DatabaseAPI.getToppings(pizzas.getInt("pizza_id")),PIZZA,pizzas.getInt("pizza_Id")));
+        while (pizzas.next()) {
+            menuProductContainer.getChildren().add(new MenuItem(pizzas.getString("name"), pizzas.getDouble("price"), pizzas.getString("image"), DatabaseAPI.getToppings(pizzas.getInt("pizza_id")), PIZZA, pizzas.getInt("pizza_Id")));
         }
     }
 

@@ -13,11 +13,12 @@ import java.io.IOException;
 
 public class MenuItem extends VBox {
 
-    private String name;
-    private double price;
-    private String image;
-    private Type type;
-    private int id;
+    private final String name;
+    private final double price;
+    private final String image;
+    private final Type type;
+    private final int id;
+
     @FXML
     private ImageView productImage;
 
@@ -27,10 +28,10 @@ public class MenuItem extends VBox {
     @FXML
     private Label itemPrice;
 
-    public MenuItem(String name, double price,String image,Type type,int id) throws IOException {
+    public MenuItem(String name, double price, String image, Type type, int id) throws IOException {
         super();
-        this.id=id;
-        this.type=type;
+        this.id = id;
+        this.type = type;
         this.name = name;
         this.price = price;
         this.image = image;
@@ -39,10 +40,11 @@ public class MenuItem extends VBox {
         loader.setRoot(this);
         loader.load();
     }
-    public MenuItem(String name, double price,String image,String[] toppings,Type type,int id) throws IOException {
+
+    public MenuItem(String name, double price, String image, String[] toppings, Type type, int id) throws IOException {
         super();
         this.type = type;
-        this.id=id;
+        this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
@@ -55,14 +57,19 @@ public class MenuItem extends VBox {
 
     @FXML
     void initialize() {
-        productImage.setImage(new Image("/images/pizza_caprese.png"));
+        try {
+            productImage.setImage(new Image(image));
+        } catch (Exception e) {
+            productImage.setImage(new Image("/images/pizzas/pizza_caprese.png"));
+        }
+
         productName.setText(name);
         itemPrice.setText(price + "");
     }
 
     @FXML
     void addToCart(MouseEvent event) throws IOException {
-        CartEntry entry = new CartEntry(name, price,type,id);
+        CartEntry entry = new CartEntry(name, price, type, id);
         ApplicationController.APP.addToCart(entry);
     }
 }

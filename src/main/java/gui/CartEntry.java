@@ -13,13 +13,13 @@ public class CartEntry extends HBox {
 
     public final String name;
     public double price;
-    private Type type;
-    private int id;
+    private final Type type;
+    private final int id;
 
     public CartEntry(String name, double price, Type type, int id) throws IOException {
         super();
-        this.type=type;
-        this.id=id;
+        this.type = type;
+        this.id = id;
         this.name = name;
         this.price = price;
 

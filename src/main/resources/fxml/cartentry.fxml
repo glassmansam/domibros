@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.HBox?>
-<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-         spacing="25.0" type="HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.*?>
+<fx:root alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefWidth="200.0" type="HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="removeButton" onMouseClicked="#removeFromCart" text="🗙">
          <cursor>
             <Cursor fx:constant="HAND"/>
          </cursor>
+         <HBox.margin>
+            <Insets left="10.0"/>
+         </HBox.margin>
       </Label>
+      <Region HBox.hgrow="ALWAYS"/>
       <Label fx:id="productName" text="Pizza"/>
+      <Region HBox.hgrow="ALWAYS"/>
       <Label fx:id="productPrice" text="Price">
          <graphic>
             <Label text="€"/>
          </graphic>
+         <HBox.margin>
+            <Insets right="15.0"/>
+         </HBox.margin>
       </Label>
    </children>
 </fx:root>
