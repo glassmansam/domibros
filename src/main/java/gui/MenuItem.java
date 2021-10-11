@@ -18,6 +18,7 @@ public class MenuItem extends VBox {
     private final String image;
     private final Type type;
     private final int id;
+    String[] toppings;
 
     @FXML
     private ImageView productImage;
@@ -29,30 +30,22 @@ public class MenuItem extends VBox {
     private Label itemPrice;
 
     public MenuItem(String name, double price, String image, Type type, int id) throws IOException {
-        super();
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.price = price;
-        this.image = image;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
-        loader.setController(this);
-        loader.setRoot(this);
-        loader.load();
+        this(name, price, image, new String[0], type, id);
     }
 
     public MenuItem(String name, double price, String image, String[] toppings, Type type, int id) throws IOException {
         super();
-        this.type = type;
         this.id = id;
+        this.type = type;
         this.name = name;
         this.price = price;
         this.image = image;
+        this.toppings = toppings;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
         loader.setController(this);
         loader.setRoot(this);
         loader.load();
-
     }
 
     @FXML

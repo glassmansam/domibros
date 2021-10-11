@@ -13,7 +13,10 @@ import logic.Customer;
 import logic.DatabaseAPI;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class StartScreenController {
 
@@ -96,12 +99,9 @@ public class StartScreenController {
     @FXML
     void login(ActionEvent event) throws IOException {
 
-        //ideally we use an "API" class that just has SQL methods that lets us do what we gotta do
-
         String password = passwordField.getText();
         String username = usernameField.getText();
 
-        //very hacky below, maybe better to use a join query but I didn't feel like googling the syntax
         try {
             ResultSet results = DatabaseAPI.getUser(username,password);
 

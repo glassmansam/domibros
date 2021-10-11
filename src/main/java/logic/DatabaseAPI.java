@@ -1,12 +1,12 @@
 package logic;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseAPI {
     static Connection connection = null;
-    static Statement statement=null;
+    static Statement statement = null;
+
     static {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -19,50 +19,56 @@ public class DatabaseAPI {
 
     public static ResultSet getAddress(int id) throws SQLException {
         String getAddress = "SELECT * FROM address WHERE address_id = '" + id + "'";
-        return  statement.executeQuery(getAddress);
+        return statement.executeQuery(getAddress);
 
     }
-    public static ResultSet getPizzas()throws SQLException{
+
+    public static ResultSet getPizzas() throws SQLException {
         String query = "SELECT * FROM pizza";
         return statement.executeQuery(query);
     }
+
     public static String[] getToppings(int id) throws SQLException {
         ArrayList<String> toppings = new ArrayList();
         statement = connection.createStatement();
-        String query = "SELECT * FROM topping INNER JOIN pizza_topping ON topping.topping_id = pizza_topping.topping_id WHERE pizza_topping.pizza_id='"+id+"'";
-        ResultSet rs =statement.executeQuery(query);
-        while(rs.next()) {
+        String query = "SELECT * FROM topping INNER JOIN pizza_topping ON topping.topping_id = pizza_topping.topping_id WHERE pizza_topping.pizza_id='" + id + "'";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
             toppings.add(rs.getString("name"));
         }
         return toppings.toArray(new String[0]);
     }
-    public static ResultSet getDrinks()throws SQLException{
+
+    public static ResultSet getDrinks() throws SQLException {
         String query = "SELECT * FROM drink";
         return statement.executeQuery(query);
     }
-    public static ResultSet getDesserts()throws SQLException{
+
+    public static ResultSet getDesserts() throws SQLException {
         String query = "SELECT * FROM dessert";
         return statement.executeQuery(query);
     }
+
     public static ResultSet getUser(String username, String password) throws SQLException {
         String getUser = "SELECT * FROM customer WHERE username = '" + username + "' AND password = '" + password + "'";
         return statement.executeQuery(getUser);
 
     }
-public static void addUser(String firstname,String lastname,String phoneNumber,String street,String postcode,String city,String password,String username) throws SQLException {
-    String insertAddress = "INSERT INTO address (street, post_code, city) values " +
-            "('" + street + "','" + postcode + "','" + city + "') ";
 
-    statement.execute(insertAddress);
-    ResultSet rs = statement.executeQuery("SELECT LAST_INSERT_ID()");
+    public static void addUser(String firstname, String lastname, String phoneNumber, String street, String postcode, String city, String password, String username) throws SQLException {
+        String insertAddress = "INSERT INTO address (street, post_code, city) values " +
+                "('" + street + "','" + postcode + "','" + city + "') ";
 
-    //for some reason it complains if we don't call "rs.next()" before trying to read from the result set
-    int address_id = rs.next() ? rs.getInt(1) : 0; //if rs.next() is true, then address_id = rs.getInt(), otherwise address_id = 0
+        statement.execute(insertAddress);
+        ResultSet rs = statement.executeQuery("SELECT LAST_INSERT_ID()");
 
-    //insert the customer into the customer database
-    String query2 = "INSERT INTO customer (username, password, first_name, last_name, phone_number, address_id) VALUES " +
-            "('" + username + "', '" + password + "', '" + firstname + "', '" + lastname + "', '" + phoneNumber + "', '" + address_id + "')";
-    statement.execute(query2);
+        //for some reason it complains if we don't call "rs.next()" before trying to read from the result set
+        int address_id = rs.next() ? rs.getInt(1) : 0; //if rs.next() is true, then address_id = rs.getInt(), otherwise address_id = 0
 
-}
+        //insert the customer into the customer database
+        String query2 = "INSERT INTO customer (username, password, first_name, last_name, phone_number, address_id) VALUES " +
+                "('" + username + "', '" + password + "', '" + firstname + "', '" + lastname + "', '" + phoneNumber + "', '" + address_id + "')";
+        statement.execute(query2);
+
+    }
 }
