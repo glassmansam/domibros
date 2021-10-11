@@ -1,16 +1,17 @@
 package gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import logic.DatabaseAPI;
 import logic.Type;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MenuItem extends VBox {
 
@@ -19,7 +20,8 @@ public class MenuItem extends VBox {
     private final String image;
     private final Type type;
     private final int id;
-    String[] toppings;
+    private final String[] toppings;
+    private boolean isVegetarian = false;
 
     @FXML
     private ImageView productImage;
@@ -37,7 +39,7 @@ public class MenuItem extends VBox {
         this(name, price, image, new String[0], type, id);
     }
 
-
+    //we dont use the toppings parameter so idk if its worth using
     public MenuItem(String name, double price, String image, String[] toppings, Type type, int id) throws IOException {
         super();
         this.id = id;
@@ -47,24 +49,26 @@ public class MenuItem extends VBox {
         this.image = image;
         this.toppings = toppings;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuitem.fxml"));
-        loader.setController(this);
-        loader.setRoot(this);
-        loader.load();
+        LoaderFXML.loadComponent(this, "/fxml/menuitem.fxml");
     }
 
     @FXML
     void initialize() {
         try {
             productImage.setImage(new Image(image));
+
+            if (type == Type.PIZZA) {
+                //TODO: indicate vegetarian status
+                for (String topping : DatabaseAPI.getToppings(id))
+                    toppingsContainer.getChildren().add(new ToppingLabel(topping));
+            } else
+                toppingsContainer.setVisible(false);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             productImage.setImage(new Image("/images/pizzas/pizza_caprese.png"));
         }
-
-        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
-        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
-        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
-        toppingsContainer.getChildren().add(new ToppingLabel("cheese"));
 
         productName.setText(name);
         itemPrice.setText(price + "");
@@ -74,5 +78,9 @@ public class MenuItem extends VBox {
     void addToCart(MouseEvent event) throws IOException {
         CartEntry entry = new CartEntry(name, price, type, id);
         ApplicationController.APP.addToCart(entry);
+    }
+
+    public void setVegetarian(boolean veg) {
+        isVegetarian = veg;
     }
 }

@@ -11,8 +11,9 @@ public class DatabaseAPI {
 
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/domibros?user=root&password=root&serverTimezone=Europe/Rome");
+            //Class.forName("com.mysql.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/domibros?useSSL=false&user=root&password=root&serverTimezone=Europe/Rome");
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();

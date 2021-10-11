@@ -55,8 +55,8 @@
             <ScrollPane hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
                <content>
                   <FlowPane fx:id="menuProductContainer" columnHalignment="CENTER" hgap="15.0" prefHeight="454.0"
-                            prefWidth="600.0" prefWrapLength="600.0" style="-fx-background-color: transparent;"
-                            vgap="15.0">
+                            prefWidth="600.0" prefWrapLength="600.0" rowValignment="TOP"
+                            style="-fx-background-color: transparent;" vgap="15.0">
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                      </padding>
@@ -143,7 +143,8 @@
             </VBox>
          </children>
       </VBox>
-      <AnchorPane fx:id="container" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0"
-                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0"/>
+      <AnchorPane fx:id="container" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;"
+                  visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="80.0"/>
    </children>
 </AnchorPane>

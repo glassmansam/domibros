@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import logic.Customer;
 import logic.DatabaseAPI;
+import logic.Order;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -91,8 +92,9 @@ public class ApplicationController {
     }
 
     @FXML
-    void makeOrder(ActionEvent event) throws SQLException {
+    void makeOrder(ActionEvent event) throws SQLException, IOException {
         boolean correctOrder = false;
+
         CartEntry[] entries = ordersList.getChildren().toArray(new CartEntry[0]);
         for (CartEntry entry : entries) {
             if (entry.getType() == PIZZA) {
@@ -101,11 +103,15 @@ public class ApplicationController {
             }
         }
         if (correctOrder) {
-        int order_id=DatabaseAPI.makeOrderAndGetId(customer.getAddress().getAddressID(),customer.getCustomerID());
-        for(CartEntry entry : entries){
-DatabaseAPI.addOrders(entry,order_id);
-        }
+            int order_id = DatabaseAPI.makeOrderAndGetId(customer.getAddress().getAddressID(), customer.getCustomerID());
+            for (CartEntry entry : entries) {
+                DatabaseAPI.addOrders(entry, order_id);
+            }
             //DO ALL ORDER STUFF WITH IT!!
+            container.setVisible(true);
+            container.getChildren().add(new OrderScreen(new Order(customer, entries)));
+
+
         } else {
             orderMessage.setText("You must have at least one pizza per order!");
         }
@@ -134,7 +140,9 @@ DatabaseAPI.addOrders(entry,order_id);
         menuProductContainer.getChildren().removeAll(menuProductContainer.getChildren());
         ResultSet pizzas = DatabaseAPI.getPizzas();
         while (pizzas.next()) {
-            menuProductContainer.getChildren().add(new MenuItem(pizzas.getString("name"), pizzas.getDouble("price"), pizzas.getString("image"), DatabaseAPI.getToppings(pizzas.getInt("pizza_id")), PIZZA, pizzas.getInt("pizza_Id")));
+            MenuItem pizza = new MenuItem(pizzas.getString("name"), pizzas.getDouble("price"), pizzas.getString("image"), DatabaseAPI.getToppings(pizzas.getInt("pizza_id")), PIZZA, pizzas.getInt("pizza_Id"));
+            pizza.setVegetarian(pizzas.getBoolean("vegetarian"));
+            menuProductContainer.getChildren().add(pizza);
         }
     }
 

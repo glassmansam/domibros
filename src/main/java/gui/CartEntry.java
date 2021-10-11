@@ -1,7 +1,6 @@
 package gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -15,9 +14,6 @@ public class CartEntry extends HBox {
     public double price;
     private final Type type;
     private final int id;
-    public int getIdentifier(){
-        return this.id;
-    }
 
     public CartEntry(String name, double price, Type type, int id) throws IOException {
         super();
@@ -26,13 +22,19 @@ public class CartEntry extends HBox {
         this.name = name;
         this.price = price;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cartentry.fxml"));
-        loader.setController(this);
-        loader.setRoot(this);
-        loader.load();
+        LoaderFXML.loadComponent(this, "/fxml/cartentry.fxml");
     }
-    public Type getType(){
+
+    public Type getType() {
         return this.type;
+    }
+
+    public int getIdentifier() {
+        return this.id;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @FXML
