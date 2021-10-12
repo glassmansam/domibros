@@ -103,10 +103,6 @@ public class ApplicationController {
             }
         }
         if (correctOrder) {
-            int order_id = DatabaseAPI.makeOrderAndGetId(customer.getAddress().getAddressID(), customer.getCustomerID());
-            for (CartEntry entry : entries) {
-                DatabaseAPI.addOrders(entry, order_id);
-            }
             //DO ALL ORDER STUFF WITH IT!!
             container.setVisible(true);
             container.getChildren().add(new OrderScreen(new Order(customer, entries)));

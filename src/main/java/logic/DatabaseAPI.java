@@ -2,6 +2,7 @@ package logic;
 
 import gui.CartEntry;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -45,8 +46,7 @@ public class DatabaseAPI {
         rs.next();
         long time = rs.getLong("last_left");
         if(time+1800000>System.currentTimeMillis()){
-            long time_left = time+1800000-System.currentTimeMillis();
-            long put_in_time = time+time_left;
+            long put_in_time = time+1800000;
             long EDT = put_in_time+900000;
                     String query2 = "UPDATE driver SET last_left = '"+put_in_time+"' WHERE driver_id = '"+rs.getInt("driver_id")+"'";
                             statement.execute(query2);
@@ -58,6 +58,13 @@ public class DatabaseAPI {
             return System.currentTimeMillis()+900000;
         }
     }
+    public static String getDriverName() throws SQLException {
+        String query = "SELECT * FROM driver ORDER BY last_left DESC LIMIT 1";
+        ResultSet rs = statement.executeQuery(query);
+        rs.next();
+        return rs.getString("name");
+    }
+
 
     public static int makeOrderAndGetId(int address_id, int customer_id) throws SQLException {
         String query = "INSERT INTO orders (address_id,customer_id) VALUES"+"('"+address_id+"','"+customer_id+"')";
