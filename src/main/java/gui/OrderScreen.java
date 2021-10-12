@@ -34,13 +34,26 @@ public class OrderScreen extends AnchorPane {
     }
 
     @FXML
-    void initialize() {
-
+    void initialize() throws SQLException {
+deliveryDriverName.setText(DatabaseAPI.getDriverName());
         cancelTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 canCancel = false;
-                Platform.runLater(() -> orderStatus.setText("OUT FOR DELIVERY"));
+                int order_id = 0;
+                try {
+                    order_id = DatabaseAPI.makeOrderAndGetId(order.getCustomer().getAddress().getAddressID(), order.getCustomer().getCustomerID());
+                    for (CartEntry entry : order.getCart()) {
+                        DatabaseAPI.addOrders(entry, order_id);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                Platform.runLater(() -> {
+                    orderStatus.setText("OUT FOR DELIVERY");
+                });
+
             }
         }, 5 * 60 * 10000); //5 min
 
