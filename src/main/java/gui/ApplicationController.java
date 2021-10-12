@@ -141,14 +141,15 @@ public class ApplicationController {
         ResultSet pizzas = DatabaseAPI.getPizzas();
         while (pizzas.next()) {
             MenuItem pizza = new MenuItem(pizzas.getString("name"), pizzas.getDouble("price"), pizzas.getString("image"), DatabaseAPI.getToppings(pizzas.getInt("pizza_id")), PIZZA, pizzas.getInt("pizza_Id"));
-            pizza.setVegetarian(pizzas.getBoolean("vegetarian"));
+            pizza.setVegetarian(pizzas.getInt(4) == 1);
             menuProductContainer.getChildren().add(pizza);
         }
     }
 
     @FXML
-    void viewProfile(ActionEvent event) {
-
+    void viewProfile(ActionEvent event) throws IOException {
+        container.setVisible(true);
+        container.getChildren().add(new CustomerProfile(customer));
     }
 
 }

@@ -3,12 +3,14 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <fx:root alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-         onMouseClicked="#addToCart" prefWidth="180.0" spacing="5.0" type="VBox" xmlns="http://javafx.com/javafx/16"
-         xmlns:fx="http://javafx.com/fxml/1">
+         onMouseClicked="#addToCart" prefWidth="180.0" spacing="5.0" style="-fx-background-color: #ffffff;" type="VBox"
+         xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="productImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true"/>
       <HBox alignment="CENTER_LEFT">
@@ -54,4 +56,11 @@
    <cursor>
       <Cursor fx:constant="HAND"/>
    </cursor>
+   <effect>
+      <DropShadow blurType="GAUSSIAN" height="30.0" radius="14.5" width="30.0">
+         <color>
+            <Color red="0.6315789222717285" green="0.6315789222717285" blue="0.6315789222717285"/>
+         </color>
+      </DropShadow>
+   </effect>
 </fx:root>

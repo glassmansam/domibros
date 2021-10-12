@@ -21,7 +21,7 @@ public class MenuItem extends VBox {
     private final Type type;
     private final int id;
     private final String[] toppings;
-    private boolean isVegetarian = false;
+    private boolean isVegetarian;
 
     @FXML
     private ImageView productImage;
@@ -58,9 +58,10 @@ public class MenuItem extends VBox {
             productImage.setImage(new Image(image));
 
             if (type == Type.PIZZA) {
-                //TODO: indicate vegetarian status
                 for (String topping : DatabaseAPI.getToppings(id))
                     toppingsContainer.getChildren().add(new ToppingLabel(topping));
+
+
             } else
                 toppingsContainer.setVisible(false);
 
@@ -80,7 +81,12 @@ public class MenuItem extends VBox {
         ApplicationController.APP.addToCart(entry);
     }
 
-    public void setVegetarian(boolean veg) {
+    public void setVegetarian(boolean veg) throws IOException {
         isVegetarian = veg;
+        if (isVegetarian) {
+            Label label = new Label();
+            LoaderFXML.loadComponent(label, "/fxml/vegetarian.fxml");
+            toppingsContainer.getChildren().add(label);
+        }
     }
 }

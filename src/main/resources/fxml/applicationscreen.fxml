@@ -3,10 +3,11 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="850.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+            prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="237.0" prefHeight="80.0" prefWidth="555.0"
             style="-fx-background-color: #34495e;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -37,16 +38,37 @@
                      <cursor>
                         <Cursor fx:constant="HAND"/>
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/pizza_slice.png"/>
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Button fx:id="dessertMenuButton" mnemonicParsing="false" onAction="#openDessertMenu" text="Desserts">
                      <cursor>
                         <Cursor fx:constant="HAND"/>
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/cookie.png"/>
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Button fx:id="drinkMenuButton" mnemonicParsing="false" onAction="#openDrinksMenu" text="Drinks">
                      <cursor>
                         <Cursor fx:constant="HAND"/>
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/drink.png"/>
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
                <padding>
@@ -55,11 +77,11 @@
             </HBox>
             <ScrollPane hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
                <content>
-                  <FlowPane fx:id="menuProductContainer" columnHalignment="CENTER" hgap="15.0" prefHeight="454.0"
-                            prefWidth="600.0" prefWrapLength="600.0" rowValignment="TOP"
-                            style="-fx-background-color: transparent;" vgap="15.0">
+                  <FlowPane fx:id="menuProductContainer" columnHalignment="CENTER" hgap="20.0" prefHeight="454.0"
+                            prefWidth="646.0" prefWrapLength="700.0" rowValignment="TOP"
+                            style="-fx-background-color: transparent;" vgap="20.0">
                      <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                      </padding>
                   </FlowPane>
                </content>
@@ -75,6 +97,13 @@
                      <cursor>
                         <Cursor fx:constant="HAND"/>
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/gear.png"/>
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
                <padding>
@@ -87,6 +116,13 @@
                      <font>
                         <Font size="24.0"/>
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/cart.png"/>
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Label>
                   <ScrollPane hbarPolicy="NEVER" prefHeight="239.0" prefWidth="237.0"
                               style="-fx-background-color: transparent;">
@@ -130,6 +166,13 @@
                      <cursor>
                         <Cursor fx:constant="HAND"/>
                      </cursor>
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/checkout.png"/>
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Label text="All prices include 9% VAT" textFill="#7f8c8d"/>
                   <Label fx:id="orderMessage" textFill="#d35400" wrapText="true">
