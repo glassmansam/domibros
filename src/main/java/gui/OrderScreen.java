@@ -8,9 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import logic.DatabaseAPI;
 import logic.Order;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,8 +27,9 @@ public class OrderScreen extends AnchorPane {
 
     private long estimatedTime = System.currentTimeMillis() + 15 * 60 * 10000;
 
-    public OrderScreen(Order order) throws IOException {
+    public OrderScreen(Order order) throws IOException, SQLException {
         this.order = order;
+        this.estimatedTime = DatabaseAPI.getDeliveryTime();
         LoaderFXML.loadComponent(this, "/fxml/orderscreen.fxml");
     }
 
