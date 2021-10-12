@@ -1,13 +1,11 @@
 package logic;
 
-import gui.MenuItem;
-
-import java.io.IOException;
-
 public class Address {
 
     private final int addressID;
-    private final String street, postocde, city;
+
+
+    private String street, postocde, city;
 
     public Address(int addressID, String street, String postcode, String city) {
         this.addressID = addressID;
@@ -30,5 +28,17 @@ public class Address {
 
     public String getCity() {
         return city;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setPostocde(String postocde) {
+        this.postocde = postocde;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

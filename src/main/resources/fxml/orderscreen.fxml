@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -136,10 +135,17 @@
                                     </font>
                                 </Label>
                                 <Region HBox.hgrow="ALWAYS"/>
-                                <Label fx:id="numOrderUntilCoupon" text="3/10">
+                                <Label fx:id="numOrderUntilCoupon" contentDisplay="RIGHT" graphicTextGap="0.0" text="3">
                                     <font>
                                         <Font size="18.0"/>
                                     </font>
+                                    <graphic>
+                                        <Label text="/10">
+                                            <font>
+                                                <Font size="18.0"/>
+                                            </font>
+                                        </Label>
+                                    </graphic>
                                 </Label>
                             </children>
                         </HBox>
@@ -149,22 +155,6 @@
                                 <Insets bottom="10.0" top="10.0"/>
                             </VBox.margin>
                         </Button>
-                        <Label text="Order History">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Label>
-                        <ScrollPane hbarPolicy="NEVER" prefHeight="193.0" prefWidth="237.0"
-                                    style="-fx-background-color: transparent;">
-                            <content>
-                                <VBox fx:id="orderHistoryContainer" fillWidth="false" maxWidth="-Infinity"
-                                      prefHeight="21.0" prefWidth="291.0" spacing="10.0">
-                                    <padding>
-                                        <Insets bottom="10.0" left="15.0" right="10.0" top="10.0"/>
-                                    </padding>
-                                </VBox>
-                            </content>
-                        </ScrollPane>
                     </children>
                     <padding>
                         <Insets left="50.0" right="50.0" top="10.0"/>

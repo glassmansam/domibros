@@ -27,10 +27,18 @@ public class DatabaseAPI {
 
     }
 
+    public static void updateCustomerInfo(Customer customer) throws SQLException {
+        String query = "UPDATE customer SET first_name = '" + customer.getFirstName() + "', last_name = '" + customer.getLastName() + "' WHERE id='" + customer.getCustomerID() + "'";
+        statement.execute(query);
+        query = "UPDATE address SET street = '" + customer.getAddress().getStreet() + "', post_code = '" + customer.getAddress().getPostocde() + "', street = '" + customer.getAddress().getCity() + "' WHERE address_id='" + customer.getAddress().getAddressID() + "'";
+        statement.execute(query);
+    }
+
     public static ResultSet getPizzas() throws SQLException {
         String query = "SELECT * FROM pizza";
         return statement.executeQuery(query);
     }
+
     public static long getDeliveryTime() throws SQLException {
         String query = "SELECT * FROM driver ORDER BY last_left ASC LIMIT 1";
         ResultSet rs = statement.executeQuery(query);

@@ -8,8 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import logic.Customer;
+import logic.DatabaseAPI;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CustomerProfile extends AnchorPane {
 
@@ -22,7 +24,7 @@ public class CustomerProfile extends AnchorPane {
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
         AnchorPane.setTopAnchor(this, 0.0);
         AnchorPane.setBottomAnchor(this, 0.0);
         AnchorPane.setLeftAnchor(this, 0.0);
@@ -35,7 +37,21 @@ public class CustomerProfile extends AnchorPane {
         postcodeInput.setText(customer.getAddress().getPostocde());
         cityInput.setText(customer.getAddress().getCity());
         phoneNumberInput.setText(customer.getPhoneNumber());
+
+        numOrderUntilCoupon.setText((customer.getAmountOrdered() % 10) + "");
+
+        for (String code : DatabaseAPI.getCodes(customer.getCustomerID())) {
+            TextField field = new TextField(code);
+            field.setEditable(false);
+            couponContainer.getChildren().add(field);
+        }
     }
+
+    @FXML
+    private Label numOrderUntilCoupon;
+
+    @FXML
+    private VBox couponContainer;
 
     @FXML
     private Label customerNameLabel;
@@ -65,8 +81,16 @@ public class CustomerProfile extends AnchorPane {
     private VBox orderHistoryContainer;
 
     @FXML
-    void updateCustomer(ActionEvent event) {
+    void updateCustomer(ActionEvent event) throws SQLException {
+        customer.setFirstName(firstNameInput.getText());
+        customer.setLastName(lastNameInput.getText());
+        customer.setPhoneNumber(phoneNumberInput.getText());
 
+        customer.getAddress().setCity(cityInput.getText());
+        customer.getAddress().setStreet(streetInput.getText());
+        customer.getAddress().setPostocde(postcodeInput.getText());
+
+        DatabaseAPI.updateCustomerInfo(customer);
     }
 
 }

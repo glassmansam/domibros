@@ -5,7 +5,9 @@ import java.sql.SQLException;
 public class Customer {
 
     private final int customerID;
-    private final String username, firstName, lastName, phoneNumber;
+
+
+    private String username, firstName, lastName, phoneNumber;
     private final Address address;
     private int amountOrdered;
 
@@ -49,5 +51,17 @@ public class Customer {
 
     public int getAmountOrdered() {
         return amountOrdered;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

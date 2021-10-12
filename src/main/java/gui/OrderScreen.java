@@ -29,7 +29,7 @@ public class OrderScreen extends AnchorPane {
 
     public OrderScreen(Order order) throws IOException, SQLException {
         this.order = order;
-        this.estimatedTime = DatabaseAPI.getDeliveryTime()-System.currentTimeMillis();
+        this.estimatedTime = DatabaseAPI.getDeliveryTime() - System.currentTimeMillis();
         LoaderFXML.loadComponent(this, "/fxml/orderscreen.fxml");
     }
 
@@ -44,17 +44,21 @@ public class OrderScreen extends AnchorPane {
             }
         }, 5 * 60 * 10000); //5 min
 
+
         estDeliverTimer.schedule(new TimerTask() {
+            int s = 0;
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    int minutes = (int) (estimatedTime / (60 * 1000));
-                    int seconds = (int) ((estimatedTime / 1000) % 60);
+                    s += 1;
+                    int minutes = (int) ((estimatedTime - s % 60) / (60 * 1000));
+                    int seconds = (int) (((estimatedTime - 1000 * s) / 1000) % 60);
                     String str = String.format("%d:%02d", minutes, seconds);
                     estimatedDeliveryTime.setText(str);
                 });
             }
         }, 0, 1000);
+
 
         firstNameLabel.setText(order.getCustomer().getFirstName());
         lastNameLabel.setText(order.getCustomer().getLastName());
@@ -121,9 +125,6 @@ public class OrderScreen extends AnchorPane {
 
     @FXML
     private Label numOrderUntilCoupon;
-
-    @FXML
-    private VBox orderHistoryContainer;
 
     @FXML
     private Button cancelOrderButton;
