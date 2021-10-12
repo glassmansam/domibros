@@ -91,6 +91,18 @@ public class DatabaseAPI {
         }
         return result.toArray(new String[0]);
     }
+    public static boolean checkAndDelete(String code,int id) throws SQLException {
+        String query = "SELECT * FROM discounts WHERE customer_id='"+id+"'";
+                ResultSet rs = statement.executeQuery(query);
+                while(rs.next()){
+                    if(rs.getString("code").equals(code)) {
+                        String queryTwo="DELETE FROM discounts WHERE code='"+code+"'";
+                        statement.execute(queryTwo);
+                        return true;
+                    }
+                }
+                return false;
+    }
 
     public static void addOrders(CartEntry item,int order_id) throws SQLException {
 
