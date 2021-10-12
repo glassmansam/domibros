@@ -29,7 +29,7 @@ public class OrderScreen extends AnchorPane {
 
     public OrderScreen(Order order) throws IOException, SQLException {
         this.order = order;
-        this.estimatedTime = DatabaseAPI.getDeliveryTime();
+        this.estimatedTime = DatabaseAPI.getDeliveryTime()-System.currentTimeMillis();
         LoaderFXML.loadComponent(this, "/fxml/orderscreen.fxml");
     }
 

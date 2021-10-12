@@ -34,6 +34,7 @@ public class DatabaseAPI {
     public static long getDeliveryTime() throws SQLException {
         String query = "SELECT * FROM driver ORDER BY last_left ASC LIMIT 1";
         ResultSet rs = statement.executeQuery(query);
+        rs.next();
         long time = rs.getLong("last_left");
         if(time+1800000>System.currentTimeMillis()){
             long time_left = time+1800000-System.currentTimeMillis();
