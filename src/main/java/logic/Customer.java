@@ -1,5 +1,7 @@
 package logic;
 
+import java.sql.SQLException;
+
 public class Customer {
 
     private final int customerID;
@@ -17,8 +19,8 @@ public class Customer {
         this.amountOrdered = amountOrdered;
     }
 
-    public void incrementOrderAmount() {
-        this.amountOrdered++;
+    public void incrementOrderAmount() throws SQLException {
+       DatabaseAPI.increase_Number(this.customerID);
     }
 
     public int getCustomerID() {
