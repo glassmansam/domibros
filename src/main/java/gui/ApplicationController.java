@@ -100,7 +100,10 @@ public class ApplicationController {
         boolean correctOrder = false;
 
         if (!couponInput.getText().equals("")) {
-            orderTotal.setText(Double.parseDouble(orderTotal.getText()) * 0.9 + "");
+            if (DatabaseAPI.checkAndDelete(couponInput.getText(), customer.getCustomerID()))
+                orderTotal.setText(Double.parseDouble(orderTotal.getText()) * 0.9 + "");
+            else
+                orderMessage.setText("Invalid Coupon");
         }
 
         CartEntry[] entries = ordersList.getChildren().toArray(new CartEntry[0]);
