@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class DatabaseAPI {
     static Connection connection = null;
     static Statement statement = null;
+    static String[] codes = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V"};
 
     static {
         try {
@@ -30,6 +31,24 @@ public class DatabaseAPI {
         String query = "SELECT * FROM pizza";
         return statement.executeQuery(query);
     }
+    public static long getDeliveryTime() throws SQLException {
+        String query = "SELECT * FROM driver ORDER BY last_left ASC LIMIT 1";
+        ResultSet rs = statement.executeQuery(query);
+        long time = rs.getLong("last_left");
+        if(time+1800000>System.currentTimeMillis()){
+            long time_left = time+1800000-System.currentTimeMillis();
+            long put_in_time = time+time_left;
+            long EDT = put_in_time+900000;
+                    String query2 = "UPDATE driver SET last_left = '"+put_in_time+"' WHERE driver_id = '"+rs.getInt("driver_id")+"'";
+                            statement.execute(query2);
+                            return EDT;
+        }
+        else{
+            String query3 = "UPDATE driver SET last_left = '"+System.currentTimeMillis()+"' WHERE driver_id = '"+rs.getInt("driver_id")+"'";
+            statement.execute(query3);
+            return System.currentTimeMillis()+900000;
+        }
+    }
 
     public static int makeOrderAndGetId(int address_id, int customer_id) throws SQLException {
         String query = "INSERT INTO orders (address_id,customer_id) VALUES"+"('"+address_id+"','"+customer_id+"')";
@@ -38,6 +57,33 @@ public class DatabaseAPI {
         int order_id = rs.next() ? rs.getInt(1):0;
         return order_id;
     }
+    public static void increase_Number(int customer_id) throws SQLException {
+        String query = "UPDATE customer SET amount_ordered = amount_ordered+1 WHERE id ="+"'"+customer_id+"'";
+        statement.execute(query);
+        ResultSet rs = statement.executeQuery("SELECT amount_ordered FROM customer WHERE id ="+"'"+customer_id+"'");
+        int currentNumber = rs.getInt("amount_ordered");
+        if(currentNumber%10==0){
+            StringBuilder sb = new StringBuilder();
+            for(int i =0;i<7;i++){
+                int current = (int) (Math.random() * codes.length);
+                sb.append(codes[current]);
+            }
+            String query3 = "INSERT INTO discounts (code,customer_id) VALUES ('"+sb.toString()+"','"+customer_id+"')";
+            statement.execute(query3);
+
+
+        }
+    }
+    public static String[] getCodes(int customer_id) throws SQLException {
+        String query = "SELECT * FROM discounts WHERE customer_id='"+customer_id+"'";
+        ResultSet rs = statement.executeQuery(query);
+        ArrayList<String> result = new ArrayList();
+        while(rs.next()){
+            result.add(rs.getString("code"));
+        }
+        return result.toArray(new String[0]);
+    }
+
     public static void addOrders(CartEntry item,int order_id) throws SQLException {
 
         if(item.getType()==Type.PIZZA){
