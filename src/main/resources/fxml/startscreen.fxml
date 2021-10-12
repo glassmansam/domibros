@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -45,7 +44,11 @@
                </font>
             </Label>
             <TextField fx:id="usernameField" maxWidth="-Infinity" prefWidth="200.0" promptText="Username"/>
-            <TextField fx:id="passwordField" maxWidth="-Infinity" prefWidth="200.0" promptText="Password"/>
+            <PasswordField fx:id="passwordField" promptText="Password">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0"/>
+               </VBox.margin>
+            </PasswordField>
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" text="Log in"/>
             <Label text="Don't have an account? Sign up -&gt;" textFill="WHITE"/>
             <Label fx:id="loginMsg" textFill="#e67e22"/>

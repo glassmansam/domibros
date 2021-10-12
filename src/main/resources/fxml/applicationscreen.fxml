@@ -175,6 +175,11 @@
                      </graphic>
                   </Button>
                   <Label text="All prices include 9% VAT" textFill="#7f8c8d"/>
+                  <TextField fx:id="couponInput" promptText="Coupon Code">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0"/>
+                     </VBox.margin>
+                  </TextField>
                   <Label fx:id="orderMessage" textFill="#d35400" wrapText="true">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0"/>

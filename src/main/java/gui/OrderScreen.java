@@ -60,14 +60,16 @@ deliveryDriverName.setText(DatabaseAPI.getDriverName());
 
         estDeliverTimer.schedule(new TimerTask() {
             int s = 0;
+            int m = 0;
             @Override
             public void run() {
                 Platform.runLater(() -> {
                     s += 1;
-                    int minutes = (int) ((estimatedTime - s % 60) / (60 * 1000));
+                    int minutes = (int) ((estimatedTime - m * 60 * 1000) / (60 * 1000));
                     int seconds = (int) (((estimatedTime - 1000 * s) / 1000) % 60);
                     String str = String.format("%d:%02d", minutes, seconds);
                     estimatedDeliveryTime.setText(str);
+                    m += s % 60 == 0 ? 1 : 0;
                 });
             }
         }, 0, 1000);
